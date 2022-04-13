@@ -11,16 +11,35 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
+from dotenv import load_dotenv
+load_dotenv()  
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# cloudinary.config(cloud_name = os.getenv('CLOUD_NAME'), api_key=os.getenv('API_KEY'), 
+#     api_secret=os.getenv('API_SECRET'))
+
+cloudinary.config( 
+    cloud_name = 'czarandrazor',
+    api_key = '493772896213515',
+    api_secret = '-qcm_6BO7McQmDhLpPjEO0W9wwI',
+    secure = True
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-sdw_518z4iz=v!^hs--crrqd4(n#k807(oe+qjd#rz32l8hjmk'
+
+SECRET_KEY = os.getenv('SECRET_KEY')
+MODE=os.getenv("MODE", default="dev")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,8 +56,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'czar',
+    'cloudinary',
     'rest_framework',
-    'czar'
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +144,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+import django_heroku
+django_heroku.settings(locals())
