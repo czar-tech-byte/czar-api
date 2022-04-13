@@ -16,7 +16,7 @@ def index(request):
     return render(request, 'index.html')
 
 
-@csrf_exempt
+#@csrf_exempt
 def products_list(request):
     
     if request.method == 'GET':
@@ -32,7 +32,7 @@ def products_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
-@csrf_exempt
+#@csrf_exempt
 def product_detail(request, pk):
     
     try:
@@ -57,7 +57,7 @@ def product_detail(request, pk):
         return HttpResponse(status=204)
 
 
-@csrf_exempt
+#@csrf_exempt
 def orders_list(request):
     
     if request.method == 'GET':
@@ -73,7 +73,7 @@ def orders_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
-@csrf_exempt
+#@csrf_exempt
 def order_detail(request, pk):
     
     try:
@@ -97,7 +97,7 @@ def order_detail(request, pk):
         orders.delete()
         return HttpResponse(status=204)
 
-@csrf_exempt
+#@csrf_exempt
 def carts_list(request):
     
     if request.method == 'GET':
@@ -113,7 +113,7 @@ def carts_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
-@csrf_exempt
+#@csrf_exempt
 def cart_detail(request, pk):
     
     try:
